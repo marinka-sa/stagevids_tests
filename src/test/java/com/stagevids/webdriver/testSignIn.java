@@ -152,13 +152,11 @@ public class testSignIn {
         Thread.sleep(1000);
         try {
             driver.findElement(By.xpath(".//*[@id='navbar']/ul/li[5]/a/div/div[1]")).click();
+            driver.findElement(By.xpath(".//*[@id='navbar']/ul/li[5]/ul/li[2]/a")).click();
         }
         catch (Exception e) {
             System.err.println("Not Logged In!");
         }
-//        driver.findElement(By.xpath(".//*[@id='navbar']/ul/li[5]/ul/li[2]/a")).click();
-
-
     }
 
 
