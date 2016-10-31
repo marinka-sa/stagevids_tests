@@ -8,18 +8,22 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import java.util.concurrent.TimeUnit;
+import java.sql.Timestamp;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static org.junit.Assert.assertTrue;
-import static org.testng.Assert.assertSame;
 
 public class testSignIn {
     private WebDriver driver;
+
+    public void GetCurrentTimeStamp( String[] args )
+    {
+        java.util.Date date= new java.util.Date();
+        System.out.println(new Timestamp(date.getTime()));
+    }
 
     @BeforeClass // Runs this method before the first test method in the current class is invoked
     public void setUp() {
@@ -40,9 +44,9 @@ public class testSignIn {
 
         Thread.sleep(1000);
         WebElement errorMessage = driver.findElement(By.cssSelector("div[ng-show='errorMessageSignIn'"));
-        System.err.println("!!!!!!!");
+        System.err.println("--- text ---");
         System.err.println(errorMessage.getText());
-        System.err.println("!!!!!!!");
+        System.err.println("------------");
         Assert.assertEquals(errorMessage.getText(), "you are awesome, but login or password is incorrect");
     }
 
@@ -61,9 +65,9 @@ public class testSignIn {
 
         Thread.sleep(1000);
         WebElement errorMessage = driver.findElement(By.cssSelector("div[ng-show='showValidMessageUserName'"));
-        System.err.println("!!!!!!!");
+        System.err.println("--- text ---");
         System.err.println(errorMessage.getText());
-        System.err.println("!!!!!!!");
+        System.err.println("------------");
         Assert.assertEquals(errorMessage.getText(), "invalid sign in email");
     }
 
@@ -83,9 +87,9 @@ public class testSignIn {
 
         Thread.sleep(1000);
         WebElement errorMessage = driver.findElement(By.cssSelector("div[ng-show='showValidMessageUserName'"));
-        System.err.println("!!!!!!!");
+        System.err.println("--- text ---");
         System.err.println(errorMessage.getText());
-        System.err.println("!!!!!!!");
+        System.err.println("------------");
         Assert.assertEquals(errorMessage.getText(), "invalid sign in email");
     }
 
@@ -104,9 +108,9 @@ public class testSignIn {
 
         Thread.sleep(1000);
         WebElement errorMessage = driver.findElement(By.cssSelector("div[ng-show='showValidMessageUserName'"));
-        System.err.println("!!!!!!!");
+        System.err.println("--- text ---");
         System.err.println(errorMessage.getText());
-        System.err.println("!!!!!!!");
+        System.err.println("------------");
         Assert.assertEquals(errorMessage.getText(), "invalid sign in email");
     }
 
@@ -125,9 +129,9 @@ public class testSignIn {
 
         Thread.sleep(1000);
         WebElement errorMessage = driver.findElement(By.cssSelector("div[ng-show='showValidMessageUserName'"));
-        System.err.println("!!!!!!!");
+        System.err.println("--- text ---");
         System.err.println(errorMessage.getText());
-        System.err.println("!!!!!!!");
+        System.err.println("------------");
         Assert.assertEquals(errorMessage.getText(), "invalid sign in email");
     }
 
@@ -145,9 +149,9 @@ public class testSignIn {
         driver.findElement(By.xpath(".//*[@id='formModal1']/input[3]")).click();
         Thread.sleep(1000);
         WebElement errorMessage = driver.findElement(By.cssSelector("div[ng-show='showValidMessageUserName'"));
-        System.err.println("!!!!!!!");
+        System.err.println("--- text ---");
         System.err.println(errorMessage.getText());
-        System.err.println("!!!!!!!");
+        System.err.println("------------");
         Assert.assertEquals(errorMessage.getText(), "");
         Thread.sleep(1000);
         try {
@@ -159,8 +163,43 @@ public class testSignIn {
         }
     }
 
+    @Test
+    public void SignUp () throws InterruptedException {
+        driver.manage().window().maximize();
+        driver.get("https://qa.stagevids.com/");
 
+        driver.findElement(By.className("btn-login")).click();
 
+        Thread.sleep(1000);
+
+        driver.findElement(By.xpath(".//*[@id='login_modal']/div/div/div[3]/div[2]/a")).click();
+        Thread.sleep(1000);
+
+        String currentTimeStamp = String.valueOf(new Timestamp(System.currentTimeMillis()).getTime());
+
+        driver.findElement(By.id("username")).sendKeys("u" + currentTimeStamp);
+        driver.findElement(By.id("password")).sendKeys("123456");
+        driver.findElement(By.id("confirm")).sendKeys("123456");
+        driver.findElement(By.id("email")).sendKeys("u" + currentTimeStamp + "@mail.com");
+        driver.findElement(By.id("city")).sendKeys("Stambul");
+
+        WebElement cbNew = driver.findElement(By.id("checkbox_new"));
+        if (!cbNew.isSelected()) {
+            driver.findElement(By.cssSelector("label[for='checkbox_new'")).click();
+        }
+        Assert.assertTrue(cbNew.isSelected());
+
+        WebElement btnSubmit = driver.findElement(By.cssSelector("input[ng-click='register_submit()'"));
+        if (btnSubmit.isEnabled()) {
+            btnSubmit.click();
+        }
+
+        // TODO: LoggedIn status must be checked
+//        WebElement userName = driver.findElement(By.xpath(".//*[@id='navbar']/ul/li[5]/a/div/div[1]"));
+//        WebElement userName = driver.findElement(By.className("ng-binding"));
+//        Assert.assertNotNull(userName.getText());
+//        Assert.assertEquals(userName.getText(), "u" + currentTimeStamp);
+    }
 
     @AfterClass // Runs this method after all the test methods in the current class have been run
     public void tearDown() {
