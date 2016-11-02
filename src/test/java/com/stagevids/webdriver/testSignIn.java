@@ -201,11 +201,13 @@ public class testSignIn {
 //        Assert.assertEquals(userName.getText(), "u" + currentTimeStamp);
     }
 
+
     @AfterClass // Runs this method after all the test methods in the current class have been run
     public void tearDown() {
-        // Close all browser windows and safely end the session
+//         Close all browser windows and safely end the session
         driver.close();
         driver.quit();
     }
 
 }
+
