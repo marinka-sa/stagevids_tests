@@ -107,21 +107,41 @@ public class testSignInSocial {
 
     @Test
     public void SignInWithGoogle2() throws InterruptedException {
-        driver.get("https://accounts.google.com/ServiceLogin?sacu=1&continue=https%3A%2F%2Fwww.google.com.ua%2F&hl=ru#identifier");
-        driver.findElement(By.id("Email")).sendKeys("marirepetilo1@gmail.com");
-        driver.findElement(By.id("next")).click();
-        Thread.sleep(1000);
-        driver.findElement(By.id("Passwd")).sendKeys("prestige81");
-        driver.findElement(By.id("signIn")).click();
+//        driver.get("https://accounts.google.com/ServiceLogin?sacu=1&continue=https%3A%2F%2Fwww.google.com.ua%2F&hl=ru#identifier");
+//        driver.findElement(By.id("Email")).sendKeys("marirepetilo1@gmail.com");
+//        driver.findElement(By.id("next")).click();
+//        Thread.sleep(1000);
+//        driver.findElement(By.id("Passwd")).sendKeys("prestige81");
+//        driver.findElement(By.id("signIn")).click();
 
         driver.manage().window().maximize();
         driver.get("https://qa.stagevids.com/");
         driver.findElement(By.xpath("html/body/div[1]/div/div/div[2]/div/div[1]/div/div/div[2]/a[2]")).click();
         Thread.sleep(1000);
-//        driver.switchTo().window(driver.getWindowHandles()[1]);
-//        driver.findElement(By.id("submit_approve_access"));
 
-        //# id = "submit_approve_access"
+        // --- Switch window --- //
+        String parentHandle = driver.getWindowHandle();
+        for(String childHandle : driver.getWindowHandles()){
+            if (!childHandle.equals(parentHandle)){
+                driver.switchTo().window(childHandle);
+            }
+        }
+
+        driver.findElement(By.id("Email")).sendKeys("marirepetilo1@gmail.com");
+        driver.findElement(By.id("next")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.id("Passwd")).sendKeys("prestige81");
+        driver.findElement(By.id("signIn")).click();
+        Thread.sleep(1000);
+
+        // TODO: needs check - element is visible and clickable?
+//        driver.findElement(By.id("submit_approve_access")).click();
+
+        driver.switchTo().window(parentHandle);
+        // --- end Switch --- //
+
+        // TODO: you should input username here, if it's necessary
+
 
 
 //        driver.findElement(By.id("Email")).sendKeys("marirepetilo1@gmail.com");
