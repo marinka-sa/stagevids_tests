@@ -45,23 +45,25 @@ public class testSignInSocial {
         driver.get("https://qa.stagevids.com/");
         driver.findElement(By.xpath("html/body/div[1]/div/div/div[2]/div/div[1]/div/div/div[2]/a[3]")).click();
         Thread.sleep(1000);
+
     }
 
     @Test
-    public void SignInWithGoogleFail() throws InterruptedException {
+    public void SignInWithGoogle1() throws InterruptedException {
         driver.manage().window().maximize();
         driver.get("https://www.google.com.ua/");
         driver.findElement(By.id("gb_70")).click();
         Thread.sleep(1000);
+
         driver.findElement(By.id("Email")).sendKeys("marirepetilo1@gmail.com");
         driver.findElement(By.id("next")).click();
-        driver.findElement(By.name("Password")).sendKeys("prestige81");
-        driver.findElement(By.xpath(".//*[@id='Passwd']")).sendKeys("prestige81");
+        Thread.sleep(1000);
+        driver.findElement(By.id("Passwd")).sendKeys("prestige81");
         driver.findElement(By.id("signIn")).click();
 
         driver.manage().window().maximize();
         driver.get("https://qa.stagevids.com/");
-        driver.findElement(By.xpath("html/body/div[1]/div/div/div[2]/div/div[1]/div/div/div[2]/a[3]")).click();
+        driver.findElement(By.xpath("html/body/div[1]/div/div/div[2]/div/div[1]/div/div/div[2]/a[2]")).click();
         Thread.sleep(1000);
     }
 
@@ -90,10 +92,17 @@ public class testSignInSocial {
         driver.get("https://qa.stagevids.com/");
         driver.findElement(By.xpath("html/body/div[1]/div/div/div[2]/div/div[1]/div/div/div[2]/a[3]")).click();
         Thread.sleep(1000);
-        driver.findElement(By.xpath(".//*[@id='oauth_form']/fieldset[1]/div")).sendKeys("marirepetilo1@gmail.com");
-//        driver.findElement(By.xpath(".//*[@id='password']")).sendKeys("kakvezde!");
-//        driver.findElement(By.xpath(".//*[@id='allow']")) .click();
+        String parentHandle = driver.getWindowHandle();
+        for(String childHandle : driver.getWindowHandles()){
+            if (!childHandle.equals(parentHandle)){
+                driver.switchTo().window(childHandle);
+            }
+        }
 
+        driver.findElement(By.id("username_or_email")).sendKeys("marirepetilo1@gmail.com");
+        driver.findElement(By.xpath(".//*[@id='password']")).sendKeys("kakvezde!");
+        driver.findElement(By.xpath(".//*[@id='allow']")) .click();
+        driver.switchTo().window(parentHandle);
     }
 
     @Test
@@ -102,6 +111,16 @@ public class testSignInSocial {
         driver.get("https://qa.stagevids.com/");
         driver.findElement(By.xpath("html/body/div[1]/div/div/div[2]/div/div[1]/div/div/div[2]/a[1]")).click();
         Thread.sleep(1000);
+        String parentHandle = driver.getWindowHandle();
+        for(String childHandle : driver.getWindowHandles()){
+            if (!childHandle.equals(parentHandle)){
+                driver.switchTo().window(childHandle);
+            }
+        }
+        driver.findElement(By.id("email")).sendKeys("+380506685116");
+        driver.findElement(By.id("pass")).sendKeys("kakvezde!");
+        driver.findElement(By.id("u_0_2")).click();
+        driver.switchTo().window(parentHandle);
     }
 
 
@@ -131,7 +150,7 @@ public class testSignInSocial {
         driver.findElement(By.id("next")).click();
         Thread.sleep(1000);
         driver.findElement(By.id("Passwd")).sendKeys("prestige81");
-        driver.findElement(By.id("signIn")).click();
+//        driver.findElement(By.id("signIn")).click();
         Thread.sleep(1000);
 
         // TODO: needs check - element is visible and clickable?
