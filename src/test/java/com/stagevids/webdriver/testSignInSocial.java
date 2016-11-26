@@ -26,6 +26,20 @@ public class testSignInSocial {
         System.out.println(new Timestamp(date.getTime()));
     }
 
+    private void logOut() {
+//        driver.findElement(By.xpath(".//*[@id='navbar']/ul/li[5]/a/div/div[1]")).click();
+//        driver.findElement(By.xpath(".//*[@id='navbar']/ul/li[5]/ul/li[2]/a")).click();
+        WebElement logout = driver.findElement(By.xpath(".//*[@id='navbar']/ul/li[5]/a"));
+//        navigationclick.click();
+        if(logout.isEnabled() && logout.isDisplayed()) {
+            logout.click();
+            driver.findElement(By.xpath(".//*[@id='navbar']/ul/li[5]/ul/li[2]/a")).click();
+        }
+        else {
+            System.out.println("Element 'dropdown' not found");
+        }
+    }
+
     @BeforeClass // Runs this method before the first test method in the current class is invoked
     public void setUp() {
         driver = new FirefoxDriver();
@@ -46,6 +60,7 @@ public class testSignInSocial {
         driver.findElement(By.xpath("html/body/div[1]/div/div/div[2]/div/div[1]/div/div/div[2]/a[3]")).click();
         Thread.sleep(1000);
 
+        logOut();
     }
 
     @Test
@@ -65,7 +80,9 @@ public class testSignInSocial {
         driver.get("https://qa.stagevids.com/");
         driver.findElement(By.xpath("html/body/div[1]/div/div/div[2]/div/div[1]/div/div/div[2]/a[2]")).click();
         Thread.sleep(1000);
+        logOut();
     }
+
 
 
     @Test
@@ -82,109 +99,10 @@ public class testSignInSocial {
         Thread.sleep(1000);
 //        driver.findElement(By.xpath(".//*[@id='u_0_4']/div[2]/div[1]/div[1]/button")).click();
 
-
+//        System.out.println(driver.findElement(By.xpath(".//*[@id='navbar']/ul/li[5]/a/div/div[1]")).getText());
+//        driver.findElement(By.xpath(".//*[@id='navbar']/ul/li[5]/ul/li[2]/a")).click();
+        logOut();
     }
-
-
-    @Test
-    public void SignInWithTwitter2Fail() throws InterruptedException {
-        driver.manage().window().maximize();
-        driver.get("https://qa.stagevids.com/");
-        driver.findElement(By.xpath("html/body/div[1]/div/div/div[2]/div/div[1]/div/div/div[2]/a[3]")).click();
-        Thread.sleep(1000);
-        String parentHandle = driver.getWindowHandle();
-        for(String childHandle : driver.getWindowHandles()){
-            if (!childHandle.equals(parentHandle)){
-                driver.switchTo().window(childHandle);
-            }
-        }
-
-        driver.findElement(By.id("username_or_email")).sendKeys("marirepetilo1@gmail.com");
-        driver.findElement(By.xpath(".//*[@id='password']")).sendKeys("kakvezde!");
-        driver.findElement(By.xpath(".//*[@id='allow']")) .click();
-        driver.switchTo().window(parentHandle);
-    }
-
-    @Test
-    public void SignInWithFacebook2() throws InterruptedException {
-        driver.manage().window().maximize();
-        driver.get("https://qa.stagevids.com/");
-        driver.findElement(By.xpath("html/body/div[1]/div/div/div[2]/div/div[1]/div/div/div[2]/a[1]")).click();
-        Thread.sleep(1000);
-        String parentHandle = driver.getWindowHandle();
-        for(String childHandle : driver.getWindowHandles()){
-            if (!childHandle.equals(parentHandle)){
-                driver.switchTo().window(childHandle);
-            }
-        }
-        driver.findElement(By.id("email")).sendKeys("+380506685116");
-        driver.findElement(By.id("pass")).sendKeys("kakvezde!");
-        driver.findElement(By.id("u_0_2")).click();
-        driver.switchTo().window(parentHandle);
-    }
-
-
-    @Test
-    public void SignInWithGoogle2() throws InterruptedException {
-//        driver.get("https://accounts.google.com/ServiceLogin?sacu=1&continue=https%3A%2F%2Fwww.google.com.ua%2F&hl=ru#identifier");
-//        driver.findElement(By.id("Email")).sendKeys("marirepetilo1@gmail.com");
-//        driver.findElement(By.id("next")).click();
-//        Thread.sleep(1000);
-//        driver.findElement(By.id("Passwd")).sendKeys("prestige81");
-//        driver.findElement(By.id("signIn")).click();
-
-        driver.manage().window().maximize();
-        driver.get("https://qa.stagevids.com/");
-        driver.findElement(By.xpath("html/body/div[1]/div/div/div[2]/div/div[1]/div/div/div[2]/a[2]")).click();
-        Thread.sleep(1000);
-
-        // --- Switch window --- //
-        String parentHandle = driver.getWindowHandle();
-        for(String childHandle : driver.getWindowHandles()){
-            if (!childHandle.equals(parentHandle)){
-                driver.switchTo().window(childHandle);
-            }
-        }
-
-        driver.findElement(By.id("Email")).sendKeys("marirepetilo1@gmail.com");
-        driver.findElement(By.id("next")).click();
-        Thread.sleep(1000);
-        driver.findElement(By.id("Passwd")).sendKeys("prestige81");
-//        driver.findElement(By.id("signIn")).click();
-        Thread.sleep(1000);
-
-        // TODO: needs check - element is visible and clickable?
-//        driver.findElement(By.id("submit_approve_access")).click();
-
-        driver.switchTo().window(parentHandle);
-        // --- end Switch --- //
-
-        // TODO: you should input username here, if it's necessary
-
-
-
-//        driver.findElement(By.id("Email")).sendKeys("marirepetilo1@gmail.com");
-//        driver.findElement(By.xpath(".//*[@id='Email']")) .sendKeys("marirepetilo1@gmail.com");
-
-//        String mainWindowHandle = driver.getWindowHandle();
-////        Set<String> oldWindowHandles = driver.getWindowHandles();
-//        driver.waitForPopUp(selenium.getAllWindowNames()[1], Config.Wait);
-//        selenium.selectWindow(selenium.getAllWindowNames()[1]);
-//        driver.findElement(By.id("Email")).sendKeys("marirepetilo1@gmail.com");
-//        driver.switchTo().window(mainWindowHandle);
-
-//        driver.findElement(By.xpath(".//*[@id='account-chooser-link")).click();
-//        driver.findElement(By.xpath(".//*[@id='account-chooser-add-account']")).click();
-//        driver.findElement(By.id("next")).click();
-
-//        driver.findElement(By.xpath(".//*[@id='Email']")) .sendKeys("marirepetilo1@gmail.com");
-//        driver.findElement(By.xpath("  .//*[@id='next']")).click();
-//        driver.findElement(By.xpath(".//*[@id='Passwd']")) .sendKeys("kakvezde!");
-
-
-    }
-
-
 
 
     @AfterClass //-- Runs this method after all the test methods in the current class have been run
