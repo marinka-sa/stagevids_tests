@@ -1,5 +1,6 @@
 package com.stagevids.webdriver;
 
+import junit.framework.TestSuite;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -30,22 +31,71 @@ public class Artists {
     }
 
 
+
     @Test
     public void ArtistClick() throws InterruptedException {
         driver.manage().window().maximize();
         driver.get("https://qa.stagevids.com/artists");
         WebElement artist = driver.findElement(
-                By.xpath("html/body/div[1]/div/div/div[2]/div/div[2]/div[3]/div/div[2]/div[2]/div[9]/a[1]/h5"));
+                By.xpath("html/body/div[2]/div/div/div[2]/div/div[2]/div[3]/div/div[2]/div[2]/div[25]/a[1]/h5"));
         String artistName = artist.getText();
         System.out.println(artistName);
         artist.click();
         Thread.sleep(1000);
         Assert.assertEquals(
-                driver.findElement(By.xpath("html/body/div[1]/div/div/div[2]/div/div[1]/div[2]/div[2]/div[2]/h1")).getText().toLowerCase(),
+                driver.findElement(By.xpath("html/body/div[2]/div/div/div[2]/div/div[1]/div[2]/div[2]/div[2]/h1")).getText().toLowerCase(),
                 artistName.toLowerCase()
         );
     }
 
+
+
+    @Test
+    public void ArtistSearch() throws InterruptedException {
+      driver.manage().window().maximize();
+        driver.get("https://qa.stagevids.com/artists");
+        Thread.sleep(1000);
+        driver.findElement(By.xpath
+                ("html/body/div[2]/div/div/div[2]/div/div[2]/div[3]/div/div[1]/div[1]/div[1]/input")).sendKeys("Bey");
+        driver.findElement(By.xpath
+                ("html/body/div[1]/div/div/div[2]/div/div[2]/div[3]/div/div[1]/div[1]/div[1]/button")).click();
+
+    }
+
+
+    @Test
+    public void NewArtistGenreRock() throws InterruptedException {
+      driver.manage().window().maximize();
+        driver.get("https://qa.stagevids.com/artists");
+        Thread.sleep(1000);
+        driver.findElement(By.xpath
+                ("html/body/div[1]/div/div/div[2]/div/div[2]/div[3]/div/div[1]/div[1]/div[2]/button")).click();
+        driver.findElement(By.xpath
+                ("html/body/div[1]/div/div/div[2]/div/div[2]/div[3]/div/div[1]/div[1]/div[2]/ul/li[5]")).click();
+        driver.findElement(By.xpath
+                ("html/body/div[1]/div/div/div[2]/div/div[2]/div[3]/div/div[1]/div[2]/div[3]/a[1]/h5")).click();
+        
+//        Assert.assertEquals(driver.findElement(By.xpath
+//                ("html/body/div[1]/div/div/div[2]/div/div[2]/div/div[2]/div[1]/div[1]/p/span[2]")).);
+
+    }
+
+
+
+    @Test
+    public void XClearFilters() throws InterruptedException {
+        driver.manage().window().maximize();
+        driver.get("https://qa.stagevids.com/artists");
+        Thread.sleep(1000);
+        
+
+
+
+
+
+
+
+    }
 
 
 
