@@ -47,7 +47,7 @@ public class testSignInSocials2 {
     public void SignInWithTwitter2Fail() throws InterruptedException {
         driver.manage().window().maximize();
         driver.get("https://qa.stagevids.com/");
-        driver.findElement(By.xpath("html/body/div[1]/div/div/div[2]/div/div[1]/div/div/div[2]/a[3]")).click();
+        driver.findElement(By.xpath("//i[@class=\"fa fa-twitter\"]")).click();
         Thread.sleep(1000);
         String parentHandle = driver.getWindowHandle();
         for(String childHandle : driver.getWindowHandles()){
@@ -67,7 +67,8 @@ public class testSignInSocials2 {
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
         driver.get("https://qa.stagevids.com/");
-        driver.findElement(By.xpath("html/body/div[1]/div/div/div[2]/div/div[1]/div/div/div[2]/a[1]")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//i[@class=\"fa fa-facebook\"]")).click();
         Thread.sleep(1000);
         String parentHandle = driver.getWindowHandle();
         for(String childHandle : driver.getWindowHandles()){
@@ -75,7 +76,6 @@ public class testSignInSocials2 {
                 driver.switchTo().window(childHandle);
             }
         }
-//        Thread.sleep(10000);
         driver.findElement(By.id("email")).sendKeys("+380506685116");
         driver.findElement(By.id("pass")).sendKeys("kakvezde!");
         driver.findElement(By.id("u_0_2")).click();
@@ -94,7 +94,8 @@ public class testSignInSocials2 {
 
         driver.manage().window().maximize();
         driver.get("https://qa.stagevids.com/");
-        driver.findElement(By.xpath("html/body/div[1]/div/div/div[2]/div/div[1]/div/div/div[2]/a[2]")).click();
+        driver.findElement(By.xpath("\n" +
+                "//i[@class=\"fa fa-google-plus\"]")).click();
         Thread.sleep(1000);
 
         // --- Switch window --- //

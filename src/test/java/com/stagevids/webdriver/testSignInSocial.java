@@ -53,7 +53,7 @@ public class testSignInSocial {
         driver.get("https://twitter.com/");
         driver.findElement(By.id("signin-email")).sendKeys("MarinaRepetilo");
         driver.findElement(By.id("signin-password")).sendKeys("kakvezde!");
-        driver.findElement(By.xpath(".//*[@id='front-container']/div[2]/div[2]/form/table/tbody/tr/td[2]/button")).click();
+        driver.findElement(By.xpath("//i[@class=\"fa fa-twitter\"]")).click();
 
         driver.manage().window().maximize();
         driver.get("https://qa.stagevids.com/");
@@ -78,7 +78,8 @@ public class testSignInSocial {
 
         driver.manage().window().maximize();
         driver.get("https://qa.stagevids.com/");
-        driver.findElement(By.xpath("html/body/div[1]/div/div/div[2]/div/div[1]/div/div/div[2]/a[2]")).click();
+        driver.findElement(By.xpath("\n" +
+                "//i[@class=\"fa fa-google-plus\"]")).click();
         Thread.sleep(1000);
         logOut();
     }
@@ -95,7 +96,7 @@ public class testSignInSocial {
         Thread.sleep(1000);
         driver.manage().window().maximize();
         driver.get("https://qa.stagevids.com/");
-        driver.findElement(By.xpath("html/body/div[1]/div/div/div[2]/div/div[1]/div/div/div[2]/a[1]")).click();
+        driver.findElement(By.xpath("//i[@class=\"fa fa-facebook\"]")).click();
         Thread.sleep(1000);
 //        driver.findElement(By.xpath(".//*[@id='u_0_4']/div[2]/div[1]/div[1]/button")).click();
 

@@ -143,8 +143,8 @@ public class testSignIn {
         driver.findElement(By.className("btn-login")).click();
 
         Thread.sleep(1000);
-        driver.findElement(By.id("login_email")).sendKeys("marirepetilo1@gmail.com");
-        driver.findElement(By.id("passsignin")).sendKeys("testov21");
+        driver.findElement(By.id("login_email")).sendKeys("stagtests@gmail.com");
+        driver.findElement(By.id("passsignin")).sendKeys("kakvezde!");
 
         driver.findElement(By.xpath(".//*[@id='formModal1']/input[3]")).click();
         Thread.sleep(1000);
